@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var s: S111 = S111()
 
-    func takesAConstPointer(x: CConstPointer<Float>) { /*...*/ }
+    func takesAConstPointer(x: UnsafePointer<Float>) { /*...*/ }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
