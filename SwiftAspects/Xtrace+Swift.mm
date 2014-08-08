@@ -372,13 +372,14 @@ static void XTRACE_RETAINED xtrace_struct( NEW_ARGS, _type *out, ARG_DEFS ) {
 template <typename _type>
 struct _xtrace_opt {
     _type val;
-    char hasValue;
+    char noValue;
 } ;
 
 struct _swift_class {
     Class meta;
     Class supr;
     void *buckets, *vtable, *pdata;
+    int f1, f2; // added for Beta5
     int size, tos, mdsize, eight;
     struct _swift_data {
         unsigned long flags;
