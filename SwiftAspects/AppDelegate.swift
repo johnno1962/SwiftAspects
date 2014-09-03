@@ -175,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Returns the managed object context for the application.
     // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-    var managedObjectContext: NSManagedObjectContext {
+    var managedObjectContext: NSManagedObjectContext! {
         if _managedObjectContext == nil {
             let coordinator = self.persistentStoreCoordinator
             if coordinator != nil {
@@ -183,7 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 _managedObjectContext!.persistentStoreCoordinator = coordinator
             }
         }
-        return _managedObjectContext!
+        return _managedObjectContext
     }
     var _managedObjectContext: NSManagedObjectContext? = nil
 
@@ -192,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var managedObjectModel: NSManagedObjectModel {
         if _managedObjectModel == nil {
             let modelURL = NSBundle.mainBundle().URLForResource("SwiftAspects", withExtension: "momd")
-            _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
+            _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL!)
         }
         return _managedObjectModel!
     }
@@ -200,7 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Returns the persistent store coordinator for the application.
     // If the coordinator doesn't already exist, it is created and the application's store added to it.
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator {
+    var persistentStoreCoordinator: NSPersistentStoreCoordinator! {
         if _persistentStoreCoordinator == nil {
             let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SwiftAspects.sqlite")
             var error: NSError? = nil
@@ -233,7 +233,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
-        return _persistentStoreCoordinator!
+        return _persistentStoreCoordinator
     }
     var _persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil
 
