@@ -482,6 +482,13 @@ struct _swift_class {
 + (BOOL)parseSwiftClass:(Class)aClass {
     struct _swift_class *sClass = XTRACE_BRIDGE(struct _swift_class *)aClass;
 
+    unsigned ic;
+    Ivar *ivars = class_copyIvarList(aClass, &ic);
+    for ( unsigned i=0 ; i<ic ; i++ ) {
+        const char *type = ivar_getTypeEncoding(ivars[i]);
+        NSLog( @"type: %s %td",  type, ivar_getOffset(ivars[i]) );
+    }
+
     // check this is swift class
     if ( !((unsigned long)sClass->pdata & 1) )
         return FALSE;

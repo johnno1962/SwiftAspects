@@ -11,6 +11,8 @@ import CoreData
 
 class S000 {
     var i: Int?
+    var k = 1
+    var l = 8.0
     func j() {
     }
 }
