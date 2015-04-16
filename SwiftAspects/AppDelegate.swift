@@ -60,14 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func takesAConstPointer(x: UnsafePointer<Float>) { /*...*/ }
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.endIndex-1] as UINavigationController
-        splitViewController.delegate = navigationController.topViewController as DetailViewController
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.endIndex-1] as! UINavigationController
+        splitViewController.delegate = navigationController.topViewController as! DetailViewController
 
-        let masterNavigationController = splitViewController.viewControllers[0] as UINavigationController
-        let controller = masterNavigationController.topViewController as MasterViewController
+        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+        let controller = masterNavigationController.topViewController as! MasterViewController
         controller.managedObjectContext = self.managedObjectContext
 
         //controller.xtrace()
@@ -244,7 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Returns the URL to the application's Documents directory.
     var applicationDocumentsDirectory: NSURL {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.endIndex-1] as NSURL
+        return urls[urls.endIndex-1] as! NSURL
     }
 
 }
