@@ -20,34 +20,34 @@ class S000 {
 class S111 : S000 {
 
     func a0(i:Int?, j:Int) {
-        println( "S111.a0: \(i!) \(j)" );
+        print( "S111.a0: \(i!) \(j)" );
     }
     func a1(i:Int?, j:Int) -> Int {
-        println( "S111.a1: \(i!) \(j)" );
+        print( "S111.a1: \(i!) \(j)" );
         return 99
     }
     func a2(i:Int?, j:Int) -> CGRect {
-        println( "S111.a2: \(i!) \(j)" );
+        print( "S111.a2: \(i!) \(j)" );
         return CGRectMake(1, 2, 3, 4)
     }
     func a3(i:Int?, j:Int) -> CGPoint {
-        println( "S111.a3: \(i!) \(j)" )
+        print( "S111.a3: \(i!) \(j)" )
         return CGPointMake(10, 20)
     }
     func a(i:Int, jsel j:Int, ksel:Int, lsel:Int, msel:Int, v:UIView?) -> Int {
-        println( "S111.a: \(msel)" )
+        print( "S111.a: \(msel)" )
         return 66;
     }
     func b(i:Int?, jsel j:Int?, ksel:Int, lsel:Int, msel:Int, s:S111!) -> Int? {
-        println( "S111.c: \(msel)" )
+        print( "S111.c: \(msel)" )
         return i;
     }
     func c(f:Float?, jsel j:Int?, ksel:Int, lsel:Int, msel:Int, s:S111!) -> Float? {
-        println( "S111.b \(msel)" )
+        print( "S111.b \(msel)" )
         return f;
     }
     func d(f:Float?, lsel:CGRect, jsel j:Int?, ksel:Int, msel:Int, s:S111) -> S111? {
-        println( "S111.d \(lsel) \(msel)" )
+        print( "S111.d \(lsel) \(msel)" )
         return s;
     }
 }
@@ -80,52 +80,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Xtrace.forSwiftClass(object_getClass(s), before:"a0:j:", callbackBlock:blockConvert({
             (obj:AnyObject?, sel:Selector, i1:CInt, _i1:CInt, i2:CInt) in
-            println( "Before.a0 \(i1) \(i2)" )
+            print( "Before.a0 \(i1) \(i2)" )
             }))
 
         Xtrace.forSwiftClass(object_getClass(s), after:"a1:j:", callbackBlock:blockConvertOpt({
             (obj:AnyObject?, sel:Selector, out:CInt, i1:CInt, _i1:CInt, i2:CInt) in
-            println( "After.a1 \(i1) \(i2)" )
+            print( "After.a1 \(i1) \(i2)" )
             return i1+i2
             }))
 
         Xtrace.forSwiftClass(object_getClass(s), before:"a2:j:", callbackBlock:blockConvert({
             (obj:AnyObject?, sel:Selector, i1:CInt, _i1:CInt, i2:CInt) in
-            println( "Before.a2 \(i1) \(i2)" )
+            print( "Before.a2 \(i1) \(i2)" )
         }))
 
         Xtrace.forSwiftClass(object_getClass(s), after:"a2:j:", callbackBlock:blockConvertRect({
             (obj:AnyObject?, sel:Selector, out1:CGRect, i1:CInt, _i1:CInt, i22:CInt) in
-            println( "After.a2 \(i1) \(i22)" )
+            print( "After.a2 \(i1) \(i22)" )
             var a = out1
             a.origin.x = 101
             return a
         }))
 
         s.a0(88, j:99)
-        println( "AppDelegate.a1: \(s.a1(1,j:2))" )
+        print( "AppDelegate.a1: \(s.a1(1,j:2))" )
 
         let r = s.a2(1, j: 22)
-        println( "AppDelegate.origin.x: \(r.origin.x)" )
-        println( "AppDelegate.origin.y: \(r.origin.y)" )
+        print( "AppDelegate.origin.x: \(r.origin.x)" )
+        print( "AppDelegate.origin.y: \(r.origin.y)" )
 
         Xtrace.forSwiftClass(object_getClass(s), after:"a3:j:", callbackBlock:blockConvertPoint({
             (obj:AnyObject?, sel:Selector, out1:CGPoint, i1:CInt, _i1:CInt, i22:CInt) in
-            println( "After.a3 \(i1) \(i22)" )
+            print( "After.a3 \(i1) \(i22)" )
             var a = out1
             a.x = 101
             return a
         }))
 
         let p = s.a3(1, j: 2)
-        println( "AppDelegate.x: \(p.x)" )
+        print( "AppDelegate.x: \(p.x)" )
 
-        var j: Int? = 888
-        var f: Float? = 1234
+        let j: Int? = 888
+        let f: Float? = 1234
 
-        println( "AppDelegate.a: \(s.a(99, jsel: 99, ksel: 99, lsel: 99, msel: 999, v: masterNavigationController.viewControllers[0].view))" );
-        println( "AppDelegate.b: \(s.b(99, jsel: j, ksel: 99, lsel: 99, msel: 999, s: s)!)");
-        println( "AppDelegate.c: \(s.c(f, jsel: j, ksel: 99, lsel: 99, msel: 999, s: s)!)");
+        print( "AppDelegate.a: \(s.a(99, jsel: 99, ksel: 99, lsel: 99, msel: 999, v: masterNavigationController.viewControllers[0].view))" );
+        print( "AppDelegate.b: \(s.b(99, jsel: j, ksel: 99, lsel: 99, msel: 999, s: s)!)");
+        print( "AppDelegate.c: \(s.c(f, jsel: j, ksel: 99, lsel: 99, msel: 999, s: s)!)");
 
         s.d(f, lsel: r, jsel: j, ksel: 99, msel: 999, s: s)?.d(f, lsel: r, jsel: j, ksel: 99, msel: 999, s: s)
 
@@ -164,12 +164,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var error: NSError? = nil
         let managedObjectContext = self.managedObjectContext
         if managedObjectContext != nil {
-            if managedObjectContext.hasChanges && !managedObjectContext.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
-                abort()
-            }
+//            if managedObjectContext.hasChanges && !managedObjectContext.save() {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                //println("Unresolved error \(error), \(error.userInfo)")
+//                abort()
+//            }
         }
     }
 
@@ -205,9 +205,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var persistentStoreCoordinator: NSPersistentStoreCoordinator! {
         if _persistentStoreCoordinator == nil {
             let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SwiftAspects.sqlite")
-            var error: NSError? = nil
             _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-            if _persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil, error: &error) == nil {
+            do {
+                try _persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+            } catch var error as NSError {
                 /*
                 Replace this implementation with code to handle the error appropriately.
 
@@ -244,7 +245,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Returns the URL to the application's Documents directory.
     var applicationDocumentsDirectory: NSURL {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.endIndex-1] as! NSURL
+        return urls[urls.endIndex-1] as NSURL
     }
 
 }
